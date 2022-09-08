@@ -12,10 +12,16 @@ public class Sheep : MonoBehaviour
     private Collider myCollider;
     private Rigidbody myRigidbody;
 
+    private SheepSpawner sheepSpawner;
 
+    public void SetSpawner(SheepSpawner spawner)
+    {
+        sheepSpawner = spawner;
+    }
 
     private void Drop()
     {
+        sheepSpawner.RemoveSheepFromList(gameObject);
         myRigidbody.isKinematic = false;
         myCollider.isTrigger = false;
         Destroy(gameObject, dropDestroyDelay);
@@ -37,6 +43,7 @@ public class Sheep : MonoBehaviour
 
     private void HitByHay()
     {
+        sheepSpawner.RemoveSheepFromList(gameObject);
         hitByHay = true;
         runSpeed = 9;
 
